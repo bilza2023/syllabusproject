@@ -1,3 +1,4 @@
+
 // subjectBuilder.js
 
 import { validateFilename, validateNoDuplicateQuestion } from "./validate.js";
@@ -8,7 +9,7 @@ export class SubjectBuilder {
     this.filename = filename;
     this.description = description;
     this.image = image;
-    this.chapters = chapters; // actual data is in this.questions - these are as reference
+    this.chapters = chapters;// actual data is in this.questions -these are as reference
     this.questions = [];
 
     // Validate all filenames at creation
@@ -38,8 +39,7 @@ export class SubjectBuilder {
         this.questions.push({
           ...q,
           chapterFilename,
-          exerciseFilename,
-          tcodeName: this.tcodeName
+          exerciseFilename
         });
       }
     };
