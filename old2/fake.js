@@ -1,6 +1,6 @@
 
 // scripts/fakeSyllabus.js
-import { Tcode } from "./index.js";
+import { Tcode } from "../index.js";
 
 const tcode = new Tcode("fbise9physics");
 

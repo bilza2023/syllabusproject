@@ -1,32 +1,49 @@
+import { SubjectBuilder } from './subjectBuilder.js';
 
-// index.js
+const sb = new SubjectBuilder({
+  tcodeName: 'fbise9physics',
+  filename: 'fbise9physics',
+  description: 'Federal Board Grade 9 Physics',
+  image: '/images/fbise9physics.png',
+  chapters: [
+    {
+      filename: 'ch1_motion',
+      name: 'Motion',
+      exercises: [
+        { filename: 'ex1_intro', name: 'Introduction' },
+        { filename: 'ex2_numericals', name: 'Numericals' }
+      ]
+    }
+  ]
+});
 
-// import Tcode from "./Tcode.js";
-import { questionTypes } from "./src/enums.js";
-import Tcode  from "./src/Tcode.js";
+// Safe handle to chapter + exercise
+const ctx = sb.getChExByFilename('ch1_motion', 'ex1_intro');
 
-// export {
-//   Tcode,
-//   questionTypes
-// };
+ctx.addQuestion({
+  filename: 'q001_velocity',
+  name: 'Define velocity',
+  type: 'md'
+});
 
-const tcode = new Tcode("fbise9physics");
+ctx.addQuestion({
+  filename: 'q002_acceleration',
+  name: 'Define acceleration',
+  type: 'md'
+});
 
-// Add Chapter
-const ch1 = tcode.addChapter({ name: "Kinematics" });
+// Bulk add
+sb.bulkAddQuestions([
+  {
+    chapter: 'ch1_motion',
+    exercise: 'ex2_numericals',
+    question: {
+      filename: 'q003_num1',
+      name: 'A car moves with constant speed...',
+      type: 'md'
+    }
+  }
+]);
 
-// Add Exercise to Chapter
-const ex1 = ch1.addExercise({ name: "Introduction" });
-
-// Add Questions to Exercise
-ex1.addQuestion({ name: "Define velocity", type: "md", questionNo: 1 });
-ex1.addQuestion({ name: "Give examples of uniform motion", type: "md", questionNo: 2, questionPart: "a" });
-
-// Add Another Chapter and Exercise
-const ch2 = tcode.addChapter({ name: "Dynamics" });
-const ex2 = ch2.addExercise({ name: "Newton's Laws" });
-
-ex2.addQuestion({ name: "State Newton's Second Law", type: "slide", questionNo: 1 });
-
-// Output Full Nested Structure
-console.log(JSON.stringify(tcode.getNestedView(), null, 2));
+// Final output
+console.log(JSON.stringify(sb.toJSON(), null, 2));

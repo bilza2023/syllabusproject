@@ -22,6 +22,8 @@ export default class Tcode {
       id,
       name,
       description,
+      image : "pivot/box.webp",
+      link : "/",
       existingChapters: this.chapters
     });
 
